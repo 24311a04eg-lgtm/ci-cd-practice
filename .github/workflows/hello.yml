@@ -1,0 +1,11 @@
+name: practice 1
+
+on: 
+  push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build
+        run: echo "hello ci cd"
