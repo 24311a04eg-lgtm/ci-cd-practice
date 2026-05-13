@@ -1,0 +1,11 @@
+name : env-demo
+
+on: push
+env:
+  ENV_VALUE: iamenv
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "the env value is $ENV_VALUE"
