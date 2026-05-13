@@ -4,8 +4,16 @@ on:
   push
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
     steps:
       - name: build
         run: echo "hello ci cd"
+
+   workf:
+    needs: build1
+    runs-on: ubuntu-latest
+    steps:
+      - name: workf
+        run: echo "hello workflow"
+
