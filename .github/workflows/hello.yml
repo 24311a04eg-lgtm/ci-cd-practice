@@ -10,10 +10,9 @@ jobs:
       - name: build
         run: echo "hello ci cd"
 
-   workf:
+  workf:
     needs: build1
     runs-on: ubuntu-latest
     steps:
       - name: workf
         run: echo "hello workflow"
-
