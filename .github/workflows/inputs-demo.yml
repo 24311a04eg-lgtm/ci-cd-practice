@@ -10,7 +10,7 @@ on:
         options:
           - dev
           - test
-          - prod
+          - production
 
 jobs:
   deploy:
