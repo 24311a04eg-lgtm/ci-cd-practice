@@ -1,0 +1,15 @@
+name: success
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+
+      - run: echo "success"
+        if: success()
+
+      - run: echo "failed"
+        if: failure()
