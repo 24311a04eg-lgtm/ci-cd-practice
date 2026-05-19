@@ -1,0 +1,5 @@
+name : oncall
+on : push
+jobs:
+  job1:
+    uses: ./.github/workflows/reusable.yml
