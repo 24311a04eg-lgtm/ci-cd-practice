@@ -1,0 +1,61 @@
+# =========================================================
+# Simple Docker Practice Workflow
+#
+# Purpose:
+# Practice basic Docker commands inside GitHub Actions
+# without needing project files or a Dockerfile.
+#
+# This workflow demonstrates:
+# - Pulling Docker images
+# - Running containers
+# - Viewing logs
+# - Inspecting containers
+# - Health check validation
+#
+# Trigger:
+# Runs on Pull Requests to main branch.
+#
+# Use this workflow as a reference for Docker CI basics.
+# =========================================================
+
+name: simple-docker-practice
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  docker-practice:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Pull official nginx image from Docker Hub
+      - name: Pull Docker image
+        run: docker pull nginx
+
+      # Run nginx container in background
+      - name: Run container
+        run: docker run -d -p 8080:80 --name mynginx nginx
+
+      # Give container time to start
+      - name: Wait for startup
+        run: sleep 5
+
+      # Show all containers including exited ones
+      - name: List containers
+        run: docker ps -a
+
+      # View runtime logs from container
+      - name: View logs
+        run: docker logs mynginx
+
+      # Inspect detailed container information
+      - name: Inspect container
+        run: docker inspect mynginx
+
+      # Verify nginx application is accessible
+      - name: Health check
+        run: curl -v http://localhost:8080
