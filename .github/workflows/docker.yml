@@ -1,0 +1,66 @@
+# =========================================================
+# Docker CI Practice Workflow
+#
+# Purpose:
+# Practice Docker validation flow inside GitHub Actions.
+#
+# This workflow demonstrates:
+# - Docker image build
+# - Vulnerability scanning
+# - Running container
+# - Viewing logs
+# - Inspecting container
+# - Health check validation
+#
+# Use this file as reference for future Docker CI pipelines.
+# =========================================================
+
+name: docker-ci-practice
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Build Docker image from Dockerfile
+      - name: Build Docker image
+        run: docker build -t flask-app:latest .
+
+      # Scan image for vulnerabilities
+      - name: Scan Docker image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: flask-app:latest
+
+      # Run container in background
+      - name: Run container
+        run: docker run -d -p 5000:5000 --name mycontainer flask-app:latest
+
+      # Give Flask app time to start
+      - name: Wait for startup
+        run: sleep 10
+
+      # List all containers including stopped/exited
+      - name: List containers
+        run: docker ps -a
+
+      # Inspect detailed container metadata
+      - name: Inspect container
+        run: docker inspect mycontainer
+
+      # View runtime logs from container
+      - name: View container logs
+        run: docker logs mycontainer
+
+      # Verify application health endpoint
+      - name: Health check
+        run: curl -v http://localhost:5000/health
