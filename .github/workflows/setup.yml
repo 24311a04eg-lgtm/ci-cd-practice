@@ -1,14 +1,14 @@
-name: Setup Python
+name: Setup Node
 
 on:
   push:
 
 jobs:
-  setup-python:
+  setup-node:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
-      - run: python python.py
+          node-version: '20'
+      - run: node --version
