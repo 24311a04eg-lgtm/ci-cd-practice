@@ -20,4 +20,5 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: demo-artifact
-      - run: cat demo-artifact/message.txt
+          path: .
+      - run: cat message.txt
