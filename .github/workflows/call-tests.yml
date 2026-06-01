@@ -1,5 +1,8 @@
-name : oncall
-on : push
+name: Call Reusable On Push
+
+on:
+  push:
+
 jobs:
-  job1:
+  call-reusable:
     uses: ./.github/workflows/reusable.yml

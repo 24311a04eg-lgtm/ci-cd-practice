@@ -1,28 +1,24 @@
-name: My workflow
+name: Artifacts Demo
 
-on: push
+on:
+  push:
 
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Create file
-        run: echo "hello" > myfile.txt
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - run: echo "hello" > message.txt
+      - uses: actions/upload-artifact@v4
         with:
-          name: my-artifact
-          path: myfile.txt
+          name: demo-artifact
+          path: message.txt
 
-  use-artifact:
+  download:
+    needs: upload
     runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
-          name: my-artifact
-
-      - name: Read file
-        run: cat myfile.txt
+          name: demo-artifact
+          path: downloaded-artifacts
+      - run: cat downloaded-artifacts/message.txt

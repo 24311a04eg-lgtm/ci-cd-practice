@@ -1,13 +1,10 @@
-name: ci
+name: Pull Request Trigger
 
 on:
   pull_request:
-    branches: [main]
 
 jobs:
-  test:
+  pr-demo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: pip install -r requirements.txt
-      - run: pytest
+      - run: echo "This runs on pull requests"

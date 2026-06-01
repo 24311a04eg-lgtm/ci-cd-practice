@@ -1,12 +1,12 @@
-name: pushtomain
+name: Main Branch Only
 
 on:
-  push
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
-    if: github.ref == 'refs/heads/main'
+  main-only:
     runs-on: ubuntu-latest
     steps:
-      - name: push
-        run: echo "push to main branch"
+      - run: echo "This runs only on main"
