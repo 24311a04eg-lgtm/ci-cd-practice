@@ -1,18 +1,10 @@
-name: practice 1
+name: Hello Workflow
 
-on: 
-  push
+on:
+  push:
 
 jobs:
-  build1:
+  hello:
     runs-on: ubuntu-latest
     steps:
-      - name: build
-        run: echo "hello ci cd"
-
-  workf:
-    needs: build1
-    runs-on: ubuntu-latest
-    steps:
-      - name: workf
-        run: echo "hello workflow"
+      - run: echo "hello ci cd"

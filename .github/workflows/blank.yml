@@ -1,27 +1,22 @@
-name: inputs demo
+name: Job Dependencies
 
-on: 
+on:
   push:
 
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
-    steps: 
-      - name: build
-        run: echo "build"
+    steps:
+      - run: echo "build"
 
   test:
-    needs: build   # 👈 test waits until build finishes successfully
+    needs: build
     runs-on: ubuntu-latest
-    steps: 
-      - name: test
-        run: echo "test"
+    steps:
+      - run: echo "test"
 
   deploy:
-    needs: test    # 👈 deploy waits until test finishes successfully
+    needs: test
     runs-on: ubuntu-latest
-    steps: 
-      - name: deploy
-        run: echo "deploy"
-
-
+    steps:
+      - run: echo "deploy"

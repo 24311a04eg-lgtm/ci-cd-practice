@@ -1,24 +1,16 @@
-name: build and deploy
-on: 
-  push: 
-    branches:
-      - main
-  pull_request:
-    types:
-      - opened
-      - synchronize
+name: Build and Deploy
+
+on:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
     steps:
-      - name: build step
-        run: echo "running this job"
+      - run: echo "building"
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
     steps:
-      - name: deployment
-        run: echo "deploying"
+      - run: echo "deploying"

@@ -1,23 +1,19 @@
-name: outputs demo
-on: push
+name: Outputs Demo
+
+on:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.set-version.outputs.version }}
     steps:
-      - id: version
-        run: echo "version=3.5.2" >> $GITHUB_OUTPUT
+      - id: set-version
+        run: echo "version=1.0.0" >> "$GITHUB_OUTPUT"
 
-      # Same job usage
-      - run: echo "Same job: ${{ steps.version.outputs.version }}"
-
-  deploy:
+  use-output:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # Other job usage
-      - run: echo "Other job: ${{ needs.build.outputs.version }}"
-      
-
+      - run: echo "Version is ${{ needs.build.outputs.version }}"

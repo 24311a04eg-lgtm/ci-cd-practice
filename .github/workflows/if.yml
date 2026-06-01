@@ -1,9 +1,11 @@
-name: IF demo
-on: push
+name: If Condition
+
+on:
+  push:
 
 jobs:
-  build:
+  branch-check:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello world"
-        if: ${{ github.ref_name == 'main' }}
+      - if: github.ref == 'refs/heads/main'
+        run: echo "This is main branch"
