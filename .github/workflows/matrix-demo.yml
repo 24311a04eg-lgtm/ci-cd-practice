@@ -1,0 +1,37 @@
+name: matrix-demo
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  matrix-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+
+      # Checkout repository
+      - uses: actions/checkout@v4
+
+      # Setup Python from matrix
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Show active version
+      - name: Show Python version
+        run: python --version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Run tests
+      - name: Run tests
+        run: pytest -v
